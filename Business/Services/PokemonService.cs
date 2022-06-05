@@ -58,6 +58,9 @@ namespace Business.Services
                 Id = s.Id,
                 Name = s.Name,
                 ImageUrl = s.ImageUrl,
+                PrimaryType = s.PrimaryType,
+                SecondaryType = s.SecondaryType,
+                Region = s.Region,
             }).ToList();
         }
 

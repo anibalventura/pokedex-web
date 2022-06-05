@@ -19,6 +19,7 @@ namespace PokedexWebApp.Controllers
         public async Task<IActionResult> Index()
         {
             List<PokemonViewModel> pokemons = await _service.GetAll();
+
             return View(pokemons);
         }
     }

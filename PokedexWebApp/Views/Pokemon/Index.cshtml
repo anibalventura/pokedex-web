@@ -27,6 +27,14 @@
 
                                     <div class="card-body">
                                         <h3>@item.Name</h3>
+                                        <div>
+                                            <small class="fw-bold">@item.PrimaryType.Name</small>
+                                            @if (item.SecondaryType != null)
+                                            {
+                                                <small class="fw-bold">@item.SecondaryType.Name</small>
+                                            }
+                                            <small class="fw-bold">@item.Region.Name</small>
+                                        </div>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group">
                                                 <a asp-controller="Pokemon" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info">Edit</a>

@@ -63,6 +63,13 @@ namespace PokedexWebApp.Controllers
 			return selectListItems;
 		}
 
+		public async Task GetDropDownLists()
+        {
+			ViewBag.Regions = await GetRegionDropDownList();
+			ViewBag.PrimaryTypes = await GetTypeDropDownList();
+			ViewBag.SecondaryTypes = await GetTypeDropDownList();
+		}
+
 		[HttpGet]
 		public async Task<IActionResult> Index()
 		{
@@ -74,9 +81,7 @@ namespace PokedexWebApp.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Create()
 		{
-			ViewBag.Regions = await GetRegionDropDownList();
-			ViewBag.PrimaryTypes = await GetTypeDropDownList();
-			ViewBag.SecondaryTypes = await GetTypeDropDownList();
+			await GetDropDownLists();
 
 			return View("Create", new SavePokemonViewModel());
 		}
@@ -86,9 +91,7 @@ namespace PokedexWebApp.Controllers
 		{
 			if (!ModelState.IsValid)
 			{
-				ViewBag.Regions = await GetRegionDropDownList();
-				ViewBag.PrimaryTypes = await GetTypeDropDownList();
-				ViewBag.SecondaryTypes = await GetTypeDropDownList();
+				await GetDropDownLists();
 
 				return View("Create", vm);
 			}
@@ -101,9 +104,7 @@ namespace PokedexWebApp.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Edit(int id)
 		{
-			ViewBag.Regions = await GetRegionDropDownList();
-			ViewBag.PrimaryTypes = await GetTypeDropDownList();
-			ViewBag.SecondaryTypes = await GetTypeDropDownList();
+			await GetDropDownLists();
 
 			return View("Create", await _pokemonService.GetById(id));
 		}
@@ -113,9 +114,7 @@ namespace PokedexWebApp.Controllers
 		{
 			if (!ModelState.IsValid)
 			{
-				ViewBag.Regions = await GetRegionDropDownList();
-				ViewBag.PrimaryTypes = await GetTypeDropDownList();
-				ViewBag.SecondaryTypes = await GetTypeDropDownList();
+				await GetDropDownLists();
 
 				return View("Create", vm);
 			}

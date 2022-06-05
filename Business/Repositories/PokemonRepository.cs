@@ -37,6 +37,9 @@ namespace Business.Repositories
         {
             return await _dbContext
                  .Set<Pokemon>()
+                 .Include(pokemon => pokemon.PrimaryType)
+                 .Include(pokemon => pokemon.SecondaryType)
+                 .Include(pokemon => pokemon.Region)
                  .ToListAsync();
         }
         public async Task<Pokemon> GetPokemonById(int id)

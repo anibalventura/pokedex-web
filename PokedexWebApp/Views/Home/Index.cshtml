@@ -22,10 +22,14 @@
 
                                     <div class="card-body">
                                         <h3>@item.Name</h3>
-                                        @*<p class="card-text">@item.Description</p>
                                         <div>
-                                            <small class="fw-bold">$@item.Price</small>
-                                        </div>*@
+                                            <small class="fw-bold">@item.PrimaryType.Name</small>
+                                            @if (item.SecondaryType != null)
+                                            {
+                                                <small class="fw-bold">@item.SecondaryType.Name</small>
+                                            }
+                                            <small class="fw-bold">@item.Region.Name</small>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

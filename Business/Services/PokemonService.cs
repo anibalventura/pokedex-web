@@ -80,10 +80,10 @@ namespace Business.Services
                 RegionId = s.RegionId,
             }).ToList();
 
-            if (filters.Name != "")
+            if (filters.Name != null)
             {
                 listViewModel = listViewModel
-                    .Where(pokemon => pokemon.Name == filters.Name)
+                    .Where(pokemon => pokemon.Name.ToLower() == filters.Name.ToLower())
                     .ToList();
             }
 

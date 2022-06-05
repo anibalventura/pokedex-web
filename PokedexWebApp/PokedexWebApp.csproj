@@ -30,5 +30,11 @@
     <None Remove="Microsoft.EntityFrameworkCore.SqlServer" />
     <None Remove="Microsoft.EntityFrameworkCore.Tools" />
     <None Remove="Microsoft.EntityFrameworkCore.Design" />
+    <None Remove="Views\Region\" />
+    <None Remove="Views\Type\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Views\Region\" />
+    <Folder Include="Views\Type\" />
   </ItemGroup>
 </Project>

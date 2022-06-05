@@ -10,6 +10,7 @@ namespace PokedexWebApp.Controllers
     public class HomeController : Controller
     {
         private readonly PokemonService _service;
+
         public HomeController(ApplicationContext dbContext)
         {
             _service = new(dbContext);

@@ -1,0 +1,43 @@
+﻿@using Business.ViewModels;
+@model List<TypeViewModel>
+@{
+    ViewData["Title"] = "Types";
+}
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header bg-primary">
+                    <h3 class="text-white">Types Maintenance</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row mb-3">
+                        <div class="col-3 offset-9">
+                            <a class="btn btn-outline-primary" asp-controller="Type" asp-action="Create">Create</a>
+                        </div>
+                    </div>
+                    <div class="row">
+                        @foreach (TypeViewModel item in Model)
+                        {
+                            <div class="col-4 mb-3">
+                                <div class="card shadow-sm">
+                                    <div class="card-body">
+                                        <h3>@item.Name</h3>
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <div class="btn-group">
+                                                <a asp-controller="Type" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info">Edit</a>
+                                                <a asp-controller="Type" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+﻿@model Business.ViewModels.SaveTypeViewModel
+@{
+    bool editMode = Model.Id == 0 ? true : false;
+    ViewData["Title"] = editMode ? "Create Type" : "Edit Type";
+}
+
+<div class="row">
+    <div class="col-6 offset-3">
+        <div class="card">
+            <div class="card-header bg-dark text-light">
+                <h4>@(editMode ? "Create a new Type" : $"Editing the Type: {Model.Name}")</h4>
+            </div>
+            <div class="card-body">
+                <form method="post" asp-controller="Type" asp-action="@(editMode ? "Create" : "Edit")">
+
+                    <input type="hidden" asp-for="Id" />
+
+                    <div class="mb-3">
+                        <label asp-for="Name" class="form-label">Name: </label>
+                        <input type="text" asp-for="Name" class="form-control">
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <a asp-controller="Type" asp-action="Index" class="btn btn-warning">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -42,11 +42,19 @@ namespace Business.Repositories
                  .Include(pokemon => pokemon.Region)
                  .ToListAsync();
         }
+
         public async Task<Pokemon> GetPokemonById(int id)
         {
             return await _dbContext
                  .Set<Pokemon>()
                  .FindAsync(id);
+        }
+
+        public async Task<List<Pokemon>> GetAllByQuery(string query)
+        {
+            return await _dbContext
+                .Set<Pokemon>()
+                .ToListAsync();
         }
     }
 }

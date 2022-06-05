@@ -9,18 +9,29 @@ namespace PokedexWebApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly PokemonService _service;
+        private readonly PokemonService _pokemonService;
+        private readonly RegionService _regionService;
 
         public HomeController(ApplicationContext dbContext)
         {
-            _service = new(dbContext);
+            _pokemonService = new(dbContext);
+            _regionService = new(dbContext);
         }
 
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
-            List<PokemonViewModel> pokemons = await _service.GetAll();
+            ViewBag.Regions = await _regionService.GetAll();
 
-            return View(pokemons);
+            return View(await _pokemonService.GetAll());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> FilterRegion(FilterPokemonViewModel filters)
+        {
+            ViewBag.Regions = await _regionService.GetAll();
+
+            return View("Index", await _pokemonService.GetAllFiltered(filters));
         }
     }
 }

@@ -3,38 +3,74 @@
     ViewData["Title"] = "Home";
 }
 
-<div class="container-fluid">
+<div class="row">
 
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header bg-primary">
-                    <h3 class="text-white">All Pokemons</h3>
-                </div>
-                <div class="card-body">
-                    <div class="row">
+    <div class="col-3">
+        <div class="card">
+            <div class="card-body">
+                <form method="post" asp-controller="Home" asp-action="FilterRegion">
+                    <h4>Filter by:</h4>
+                    <hr class="my-3">
 
-                        @foreach (PokemonViewModel item in Model)
+                    <div class="form-group">
+                        <label id="name">Name:</label>
+                        <div><input class="form-control w-100" type="text" placeholder="Name" name="Name" id="name" value=""></div>
+                    </div>
+                    <hr class="my-3">
+
+                    <div class="form-group">
+                        <label>Region:</label>
+                        <div class="form-check">
+                            <input class="form-check-input" value="null" type="radio" name="RegionId" id="region-all" />
+                            <label class="form-check-label" for="region-all">All</label>
+                        </div>
+
+                        @foreach (RegionViewModel region in ViewBag.Regions)
                         {
-                            <div class="col-4 mb-3">
-                                <div class="card shadow-sm">
-                                    <img src="@item.ImageUrl" class="img-product-size bd-placeholder-img card-img-top " />
-
-                                    <div class="card-body">
-                                        <h3>@item.Name</h3>
-                                        <div>
-                                            <small class="fw-bold">@item.PrimaryType.Name</small>
-                                            @if (item.SecondaryType != null)
-                                            {
-                                                <small class="fw-bold">@item.SecondaryType.Name</small>
-                                            }
-                                            <small class="fw-bold">@item.Region.Name</small>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="form-check">
+                                <input class="form-check-input" value="@region.Id" type="radio" name="RegionId" id="region-@region.Id" />
+                                <label class="form-check-label" for="region-@region.Id">@region.Name</label>
                             </div>
                         }
                     </div>
+                    <hr class="my-3">
+
+                    <div class="text-center px-xl-3">
+                        <button class="btn btn-success btn-block" type="submit">Filter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-9">
+        <div class="card">
+            <div class="card-header bg-primary">
+                <h3 class="text-white">All Pokemons</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+
+                    @foreach (PokemonViewModel item in Model)
+                    {
+                        <div class="col-4 mb-3">
+                            <div class="card shadow-sm">
+                                <img src="@item.ImageUrl" class="img-product-size bd-placeholder-img card-img-top " />
+
+                                <div class="card-body">
+                                    <h3>@item.Name</h3>
+                                    <div>
+                                        <small class="fw-bold">@item.PrimaryType.Name</small>
+                                        @if (item.SecondaryType != null)
+                                        {
+                                            <small class="fw-bold">@item.SecondaryType.Name</small>
+                                        }
+                                        <small class="fw-bold">@item.Region.Name</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
         </div>

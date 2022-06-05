@@ -10,5 +10,7 @@ namespace Business.ViewModels
 		public Type PrimaryType { get; set; }
 		public Type SecondaryType { get; set; }
 		public Region Region { get; set; }
+
+		public int RegionId { get; set; }
 	}
 }

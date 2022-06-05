@@ -51,9 +51,9 @@ namespace Business.Services
 
         public async Task<List<PokemonViewModel>> GetAll()
         {
-            List<Pokemon> list = await _repository.GetAllPokemons();
+            List<Pokemon> pokemons = await _repository.GetAllPokemons();
 
-            return list.Select(s => new PokemonViewModel
+            return pokemons.Select(s => new PokemonViewModel
             {
                 Id = s.Id,
                 Name = s.Name,
@@ -61,7 +61,40 @@ namespace Business.Services
                 PrimaryType = s.PrimaryType,
                 SecondaryType = s.SecondaryType,
                 Region = s.Region,
+                RegionId = s.RegionId,
             }).ToList();
+        }
+
+        public async Task<List<PokemonViewModel>> GetAllFiltered(FilterPokemonViewModel filters)
+        {
+            List<Pokemon> pokemons = await _repository.GetAllPokemons();
+
+            List<PokemonViewModel> listViewModel = pokemons.Select(s => new PokemonViewModel
+            {
+                Id = s.Id,
+                Name = s.Name,
+                ImageUrl = s.ImageUrl,
+                PrimaryType = s.PrimaryType,
+                SecondaryType = s.SecondaryType,
+                Region = s.Region,
+                RegionId = s.RegionId,
+            }).ToList();
+
+            if (filters.Name != "")
+            {
+                listViewModel = listViewModel
+                    .Where(pokemon => pokemon.Name == filters.Name)
+                    .ToList();
+            }
+
+            if (filters.RegionId != null)
+            {
+                listViewModel = listViewModel
+                    .Where(pokemon => pokemon.RegionId == filters.RegionId.Value)
+                    .ToList();
+            }
+
+            return listViewModel;
         }
 
         public async Task<SavePokemonViewModel> GetById(int id)

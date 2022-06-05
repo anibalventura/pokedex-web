@@ -1,0 +1,53 @@
+﻿@model Business.ViewModels.SavePokemonViewModel
+@{
+    bool editMode = Model.Id == 0 ? true : false;
+    ViewData["Title"] = editMode ? "Create Pokemon" : "Edit Pokemon";
+}
+
+<div class="row">
+    <div class="col-6 offset-3">
+        <div class="card">
+            <div class="card-header bg-dark text-light">
+                <h4>@(editMode ? "Create a new Pokemon" : $"Editing the Pokemon: {Model.Name}")</h4>
+            </div>
+            <div class="card-body">
+                <form method="post" asp-controller="Pokemon" asp-action="@(editMode ? "Create" : "Edit")">
+
+                    <input type="hidden" asp-for="Id" />
+
+                    <div class="mb-3">
+                        <label asp-for="Name" class="form-label">Name: </label>
+                        <input type="text" asp-for="Name" class="form-control">
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="ImageUrl" class="form-label">Image URL: </label>
+                        <input type="text" asp-for="ImageUrl" class="form-control">
+                        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="PrimaryTypeId" class="form-label">Primary Type: </label>
+                        <select asp-for="PrimaryTypeId" asp-items="ViewBag.PrimaryTypes"></select>
+                        <span asp-validation-for="PrimaryTypeId" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="SecondaryTypeId" class="form-label">Secondary Type: </label>
+                        <select asp-for="SecondaryTypeId" asp-items="ViewBag.SecondaryTypes"></select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="RegionId" class="form-label">Region: </label>
+                        <select asp-for="RegionId" asp-items="ViewBag.Regions"></select>
+                        <span asp-validation-for="RegionId" class="text-danger"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <a asp-controller="Pokemon" asp-action="Index" class="btn btn-warning">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

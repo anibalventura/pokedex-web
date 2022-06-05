@@ -32,9 +32,11 @@
     <None Remove="Microsoft.EntityFrameworkCore.Design" />
     <None Remove="Views\Region\" />
     <None Remove="Views\Type\" />
+    <None Remove="Views\Pokemon\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Region\" />
     <Folder Include="Views\Type\" />
+    <Folder Include="Views\Pokemon\" />
   </ItemGroup>
 </Project>

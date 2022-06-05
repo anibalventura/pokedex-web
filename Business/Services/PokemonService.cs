@@ -32,6 +32,7 @@ namespace Business.Services
         public async Task Update(SavePokemonViewModel vm)
         {
             Pokemon pokemon = new();
+            pokemon.Id = vm.Id;
             pokemon.Name = vm.Name;
             pokemon.ImageUrl = vm.ImageUrl;
             pokemon.PrimaryTypeId = vm.PrimaryTypeId;

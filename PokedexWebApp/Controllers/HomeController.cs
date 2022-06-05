@@ -27,7 +27,7 @@ namespace PokedexWebApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> FilterRegion(FilterPokemonViewModel filters)
+        public async Task<IActionResult> Filter(FilterPokemonViewModel filters)
         {
             ViewBag.Regions = await _regionService.GetAll();
 

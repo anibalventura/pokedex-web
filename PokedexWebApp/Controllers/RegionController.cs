@@ -19,9 +19,7 @@ namespace PokedexWebApp.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Index()
 		{
-			List<RegionViewModel> list = await _service.GetAll();
-
-			return View(list);
+			return View(await _service.GetAll());
 		}
 
 		[HttpGet]

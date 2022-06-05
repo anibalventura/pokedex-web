@@ -1,4 +1,5 @@
-﻿@model Business.ViewModels.SavePokemonViewModel
+﻿@using Business.ViewModels
+@model Business.ViewModels.SavePokemonViewModel
 @{
     bool editMode = Model.Id == 0 ? true : false;
     ViewData["Title"] = editMode ? "Create Pokemon" : "Edit Pokemon";
@@ -29,18 +30,39 @@
 
                     <div class="mb-3">
                         <label asp-for="PrimaryTypeId" class="form-label">Primary Type: </label>
-                        <select asp-for="PrimaryTypeId" asp-items="ViewBag.PrimaryTypes"></select>
+                        <select asp-for="PrimaryTypeId">
+                            <option value="">Select</option>
+
+                            @foreach(TypeViewModel type in ViewBag.Types)
+                            {
+                                <option value="@type.Id">@type.Name</option>
+                            }
+                        </select>
                         <span asp-validation-for="PrimaryTypeId" class="text-danger"></span>
                     </div>
 
                     <div class="mb-3">
                         <label asp-for="SecondaryTypeId" class="form-label">Secondary Type: </label>
-                        <select asp-for="SecondaryTypeId" asp-items="ViewBag.SecondaryTypes"></select>
+                        <select asp-for="SecondaryTypeId">
+                            <option value="">Select</option>
+
+                            @foreach (TypeViewModel type in ViewBag.Types)
+                            {
+                                <option value="@type.Id">@type.Name</option>
+                            }
+                        </select>
                     </div>
 
                     <div class="mb-3">
                         <label asp-for="RegionId" class="form-label">Region: </label>
-                        <select asp-for="RegionId" asp-items="ViewBag.Regions"></select>
+                        <select asp-for="RegionId">
+                            <option value="">Select</option>
+
+                            @foreach (RegionViewModel type in ViewBag.Regions)
+                            {
+                                <option value="@type.Id">@type.Name</option>
+                            }
+                        </select>
                         <span asp-validation-for="RegionId" class="text-danger"></span>
                     </div>
 

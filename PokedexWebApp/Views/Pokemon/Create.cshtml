@@ -6,68 +6,74 @@
 }
 
 <div class="row">
-    <div class="col-6 offset-3">
-        <div class="card">
+    <div class="col-5 offset-3">
+        <div class="card shadow-sm">
             <div class="card-header bg-dark text-light">
-                <h4>@(editMode ? "Create a new Pokemon" : $"Editing the Pokemon: {Model.Name}")</h4>
+                <h4>@(editMode ? "Create a Pokemon" : $"Editing the Pokemon: {Model.Name}")</h4>
             </div>
             <div class="card-body">
                 <form method="post" asp-controller="Pokemon" asp-action="@(editMode ? "Create" : "Edit")">
 
                     <input type="hidden" asp-for="Id" />
 
-                    <div class="mb-3">
-                        <label asp-for="Name" class="form-label">Name: </label>
-                        <input type="text" asp-for="Name" class="form-control">
-                        <span asp-validation-for="Name" class="text-danger"></span>
+                    <div class="form-group row mb-3">
+                        <div class="col">
+                            <label asp-for="Name" class="form-label">Name: </label>
+                            <input type="text" asp-for="Name" placeholder="Enter a name..." class="form-control shadow-sm">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <label asp-for="ImageUrl" class="form-label">Image URL: </label>
+                            <input type="text" asp-for="ImageUrl" placeholder="Enter a image URL..." class="form-control shadow-sm">
+                            <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                        </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label asp-for="ImageUrl" class="form-label">Image URL: </label>
-                        <input type="text" asp-for="ImageUrl" class="form-control">
-                        <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                    <div class="form-group row mb-3">
+                        <div class="col">
+                            <label asp-for="PrimaryTypeId" class="form-label">Primary Type: </label>
+                            <select asp-for="PrimaryTypeId">
+                                <option value="">Select</option>
+
+                                @foreach (TypeViewModel type in ViewBag.Types)
+                                {
+                                    <option value="@type.Id">@type.Name</option>
+                                }
+                            </select>
+                            <span asp-validation-for="PrimaryTypeId" class="text-danger"></span>
+                        </div>
+                        <div class="col">
+                            <label asp-for="RegionId" class="form-label">Region: </label>
+                            <select asp-for="RegionId">
+                                <option value="">Select</option>
+
+                                @foreach (RegionViewModel type in ViewBag.Regions)
+                                {
+                                    <option value="@type.Id">@type.Name</option>
+                                }
+                            </select>
+                            <span asp-validation-for="RegionId" class="text-danger"></span>
+                        </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label asp-for="PrimaryTypeId" class="form-label">Primary Type: </label>
-                        <select asp-for="PrimaryTypeId">
-                            <option value="">Select</option>
+                    <div class="form-group row mb-3">
+                        <div class="col">
+                            <label asp-for="SecondaryTypeId" class="form-label">Secondary Type: </label>
+                            <select asp-for="SecondaryTypeId">
+                                <option value="">Select</option>
 
-                            @foreach(TypeViewModel type in ViewBag.Types)
-                            {
-                                <option value="@type.Id">@type.Name</option>
-                            }
-                        </select>
-                        <span asp-validation-for="PrimaryTypeId" class="text-danger"></span>
+                                @foreach (TypeViewModel type in ViewBag.Types)
+                                {
+                                    <option value="@type.Id">@type.Name</option>
+                                }
+                            </select>
+                        </div>
                     </div>
 
-                    <div class="mb-3">
-                        <label asp-for="SecondaryTypeId" class="form-label">Secondary Type: </label>
-                        <select asp-for="SecondaryTypeId">
-                            <option value="">Select</option>
-
-                            @foreach (TypeViewModel type in ViewBag.Types)
-                            {
-                                <option value="@type.Id">@type.Name</option>
-                            }
-                        </select>
+                    <div class="container-fluid text-center">
+                        <button type="submit" class="btn btn-success shadow-sm">Save</button>
+                        <a asp-controller="Pokemon" asp-action="Index" class="btn btn-secondary shadow-sm">Cancel</a>
                     </div>
-
-                    <div class="mb-3">
-                        <label asp-for="RegionId" class="form-label">Region: </label>
-                        <select asp-for="RegionId">
-                            <option value="">Select</option>
-
-                            @foreach (RegionViewModel type in ViewBag.Regions)
-                            {
-                                <option value="@type.Id">@type.Name</option>
-                            }
-                        </select>
-                        <span asp-validation-for="RegionId" class="text-danger"></span>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Save</button>
-                    <a asp-controller="Pokemon" asp-action="Index" class="btn btn-warning">Cancel</a>
                 </form>
             </div>
         </div>

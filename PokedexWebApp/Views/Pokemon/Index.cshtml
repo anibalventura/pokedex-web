@@ -4,38 +4,47 @@
     ViewData["Title"] = "Pokemons";
 }
 
-<div class="container-fluid">
-
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-header bg-primary">
-                    <h3 class="text-white">Pokemons Maintenance</h3>
+<div class="row justify-content-center">
+    <div class="col-11">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary bg-opacity-75">
+                <h3 class="text-white">
+                    Pokemons Maintenance
+                    <a class="btn btn-success shadow-sm" asp-controller="Pokemon" asp-action="Create">Create</a>
+                </h3>
+            </div>
+            @if (Model == null)
+            {
+                <div class="container-fluid text-center m-5">
+                    <h4>No Pokemons created...</h4>
+                    <h5>Start creating one!</h5>
                 </div>
+            }
+            else
+            {
                 <div class="card-body">
-                    <div class="row mb-3">
-                        <div class="col-3 offset-9">
-                            <a class="btn btn-outline-primary" asp-controller="Pokemon" asp-action="Create">Create</a>
-                        </div>
-                    </div>
                     <div class="row">
                         @foreach (PokemonViewModel item in Model)
                         {
-                            <div class="col-4 mb-3">
+                            <div class="col-2 mb-3">
                                 <div class="card shadow-sm">
-                                    <img src="@item.ImageUrl" class="img-product-size bd-placeholder-img card-img-top" />
+                                    <img src="@item.ImageUrl" class="img-thumbnail card-img-top" />
 
                                     <div class="card-body">
                                         <h3>@item.Name</h3>
                                         <div>
-                                            <small class="fw-bold">@item.PrimaryType.Name</small>
+                                            <label class="card-subtitle text-muted">Types:</label>
+                                            <span class="badge text-bg-primary">@item.PrimaryType.Name</span>
                                             @if (item.SecondaryType != null)
                                             {
-                                                <small class="fw-bold">@item.SecondaryType.Name</small>
+                                                <span class="badge text-bg-secondary">@item.SecondaryType.Name</span>
                                             }
-                                            <small class="fw-bold">@item.Region.Name</small>
                                         </div>
-                                        <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <label class="card-subtitle text-muted">Region:</label>
+                                            <span class="badge text-bg-info">@item.Region.Name</span>
+                                        </div>
+                                        <div class="mt-3 d-flex justify-content-between align-items-center">
                                             <div class="btn-group">
                                                 <a asp-controller="Pokemon" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info">Edit</a>
                                                 <a asp-controller="Pokemon" asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger">Delete</a>
@@ -47,7 +56,7 @@
                         }
                     </div>
                 </div>
-            </div>
+            }
         </div>
     </div>
 </div>

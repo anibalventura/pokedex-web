@@ -10,7 +10,7 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-danger border-bottom box-shadow mb-3">
-            <div class="container">
+            <div class="container-fluid">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Pokedex</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -22,25 +22,25 @@
                             <a class="nav-link text-white" asp-area="" asp-controller="Pokemon" asp-action="Index">Pokemons</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Region" asp-action="Index">Regions</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Type" asp-action="Index">Types</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Type" asp-action="Index">Types</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Region" asp-action="Index">Regions</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
+    <div class="container-fluid">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - <a href="https://www.anibalventura.com/">Anibal Ventura</a>
+        <div class="container-fluid text-center">
+            <p>&copy; @DateTime.Now.Year - <a href="https://www.anibalventura.com/">Anibal Ventura</a></p>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

@@ -3,22 +3,22 @@
     ViewData["Title"] = "Home";
 }
 
-<div class="row">
-    <div class="col-3">
-        <div class="card">
+<div class="row justify-content-center">
+    <div class="col-2">
+        <div class="card shadow-sm">
+            <div class="card-header bg-secondary">
+                <h3 class="text-white">Filter by:</h3>
+            </div>
             <div class="card-body">
                 <form method="post" asp-controller="Home" asp-action="Filter">
-                    <h4>Filter by:</h4>
-                    <hr class="my-3">
-
                     <div class="form-group">
-                        <label id="name">Name:</label>
-                        <div><input class="form-control w-100" type="text" placeholder="Name" name="Name" id="name" value=""></div>
+                        <label><strong>Name:</strong></label>
+                        <div><input class="form-control w-100" type="text" placeholder="Type a name..." name="Name" id="name" value=""></div>
                     </div>
                     <hr class="my-3">
 
                     <div class="form-group">
-                        <label>Region:</label>
+                        <label><strong>Region:</strong></label>
                         <div class="form-check">
                             <input class="form-check-input" value="null" type="radio" name="RegionId" id="region-all" />
                             <label class="form-check-label" for="region-all">All</label>
@@ -35,7 +35,7 @@
                     <hr class="my-3">
 
                     <div class="text-center px-xl-3">
-                        <button class="btn btn-success btn-block" type="submit">Filter</button>
+                        <button class="btn btn-success shadow-sm btn-block" type="submit">Filter</button>
                     </div>
                 </form>
             </div>
@@ -43,35 +43,50 @@
     </div>
 
     <div class="col-9">
-        <div class="card">
-            <div class="card-header bg-primary">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary bg-opacity-75">
                 <h3 class="text-white">All Pokemons</h3>
             </div>
-            <div class="card-body">
-                <div class="row">
+            @if (Model == null)
+            {
+                    <div class="container-fluid text-center m-5">
+                        <h4>No Pokemons created...</h4>
+                    </div>
+            }
+            else
+            {
+                <div class="card-body">
+                    <div class="row">
 
-                    @foreach (PokemonViewModel item in Model)
-                    {
-                        <div class="col-4 mb-3">
-                            <div class="card shadow-sm">
-                                <img src="@item.ImageUrl" class="img-product-size bd-placeholder-img card-img-top " />
+                        @foreach (PokemonViewModel item in Model)
+                        {
+                            <div class="col-3 mb-3">
+                                <div class="card shadow-sm">
+                                    <img src="@item.ImageUrl" class="img-thumbnail card-img-top" />
 
-                                <div class="card-body">
-                                    <h3>@item.Name</h3>
-                                    <div>
-                                        <small class="fw-bold">@item.PrimaryType.Name</small>
-                                        @if (item.SecondaryType != null)
-                                        {
-                                            <small class="fw-bold">@item.SecondaryType.Name</small>
-                                        }
-                                        <small class="fw-bold">@item.Region.Name</small>
+                                    <div class="card-body">
+                                        <h4>@item.Name</h4>
+                                        <div>
+                                            <div>
+                                                <label class="card-subtitle text-muted">Types:</label>
+                                                <span class="badge text-bg-primary">@item.PrimaryType.Name</span>
+                                                @if (item.SecondaryType != null)
+                                                {
+                                                    <span class="badge text-bg-secondary">@item.SecondaryType.Name</span>
+                                                }
+                                            </div>
+                                            <div>
+                                                <label class="card-subtitle text-muted">Region:</label>
+                                                <span class="badge text-bg-info">@item.Region.Name</span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    }
+                        }
+                    </div>
                 </div>
-            </div>
+            }
         </div>
     </div>
 </div>

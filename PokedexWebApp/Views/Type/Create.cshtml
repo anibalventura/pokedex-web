@@ -5,24 +5,28 @@
 }
 
 <div class="row">
-    <div class="col-6 offset-3">
-        <div class="card">
+    <div class="col-5 offset-3">
+        <div class="card shadow-sm">
             <div class="card-header bg-dark text-light">
-                <h4>@(editMode ? "Create a new Type" : $"Editing the Type: {Model.Name}")</h4>
+                <h4>@(editMode ? "Create a Type" : $"Editing the Type: {Model.Name}")</h4>
             </div>
             <div class="card-body">
                 <form method="post" asp-controller="Type" asp-action="@(editMode ? "Create" : "Edit")">
 
                     <input type="hidden" asp-for="Id" />
 
-                    <div class="mb-3">
-                        <label asp-for="Name" class="form-label">Name: </label>
-                        <input type="text" asp-for="Name" class="form-control">
-                        <span asp-validation-for="Name" class="text-danger"></span>
+                    <div class="form-group mb-3">
+                        <div>
+                            <label asp-for="Name" class="form-label">Name: </label>
+                            <input type="text" asp-for="Name" placeholder="Enter a name..." class="form-control shadow-sm">
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Save</button>
-                    <a asp-controller="Type" asp-action="Index" class="btn btn-warning">Cancel</a>
+                    <div class="container-fluid text-center">
+                        <button type="submit" class="btn btn-success shadow-sm">Save</button>
+                        <a asp-controller="Type" asp-action="Index" class="btn btn-secondary shadow-sm">Cancel</a>
+                    </div>
                 </form>
             </div>
         </div>

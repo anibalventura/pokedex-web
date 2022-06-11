@@ -4,8 +4,8 @@
 [![License](https://img.shields.io/static/v1?label=License&message=MIT&color=blue)](LICENCE.md)
 
 <p align="center">
-  <img src="./screenshots/pokedex-home.png" height=250px/>
-  <img src="./screenshots/pokedex-pokemon-edit.png" height=250px/>
+  <img src="./screenshots/pokedex-home.png" height=300px/>
+  <img src="./screenshots/pokedex-pokemon-edit.png" height=300px/>
 </p>
 
 Made with ASP.NET, FluentAPI to manage a SQL database and layers architecture.
